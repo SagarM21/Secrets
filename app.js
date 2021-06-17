@@ -9,6 +9,11 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 
+// const bcrypt = require("bcrypt");  //To store hashes with saltRounds
+// const saltRounds = 10;
+//const md5 = require("md5");  //To store hashed text, md5 is a function of hashing
+// const encrypt = require("mongoose-encryption"); To store text in encrypted format using mongoose-encryption package.
+
 const app = express();
 
 app.use(express.static("public"));
@@ -39,6 +44,7 @@ const userSchema = new mongoose.Schema({
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
+// userSchema.plugin(encrypt, {secret: process.env.SECRET, encryptedFields: ["password"] }); IN_CASE i want to use mongoose-encryption.
 
 const User = new mongoose.model("User", userSchema);
 
